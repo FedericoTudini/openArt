@@ -11,7 +11,7 @@ export default function Home() {
       <Navbar />
       <Search />
       <Map />
-    </View>    
+    </View>
   );
 }
 
