@@ -12,12 +12,7 @@ export default class Artwork extends Component {
         return (
             <View>
                 <Navbar />
-                <View>
-                    <Image></Image>
-                </View>
-                <View>
-
-                </View>
+                <Text></Text>
             </View>
         );
     }

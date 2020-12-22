@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
+import { StyleSheet, Text, Image, View, Button } from 'react-native';
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 import Search from './search.js';
 
@@ -15,7 +15,7 @@ class Map extends Component {
             ],
         };
       }
-    list () {
+    list ({navigation}) {
         return this.state.artworks.map(artwork => {
             return (
                     <Marker 
@@ -26,9 +26,9 @@ class Map extends Component {
                         <Callout tooltip={true}>
                             <View>
                                 <View style={styles.call}>
-                                    <Image source={artwork.path} />
                                     <Text>{artwork.name}</Text>
                                     <Text>{artwork.artist}</Text>
+                                    <Button title='Scopri di più' onPress={() => navigation.navigate('Details')}/>
                                 </View>
                                 <View style={styles.arrowBorder} />
                                 <View style={styles.arrow} />
