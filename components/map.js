@@ -15,7 +15,7 @@ class Map extends Component {
             ],
         };
       }
-    list ({navigation}) {
+    list () {
         return this.state.artworks.map(artwork => {
             return (
                     <Marker 
@@ -28,7 +28,7 @@ class Map extends Component {
                                 <View style={styles.call}>
                                     <Text>{artwork.name}</Text>
                                     <Text>{artwork.artist}</Text>
-                                    <Button title='Scopri di più' onPress={() => navigation.navigate('Details')}/>
+                                    <Button title='Scopri di più'/>
                                 </View>
                                 <View style={styles.arrowBorder} />
                                 <View style={styles.arrow} />
