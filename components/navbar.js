@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.81,
 
     elevation: 2,
-    paddingHorizontal: 25
+    paddingHorizontal: 10
   },
   leftonly: {
     flexDirection: 'row',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.81,
 
     elevation: 2,
-    paddingHorizontal: 25
+    paddingHorizontal: 10
   },
   logo : {
     height: '60%',
