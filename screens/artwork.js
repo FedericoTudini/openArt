@@ -37,13 +37,10 @@ export default class Artwork extends Component {
                     <View style={styles.boxBottom}>
                         <View style={{flex:8, justifyContent: 'space-around', paddingBottom: 12, paddingTop: 8}}>
                             <Text style={styles.txtArtwork}>{art.name}</Text>
-                            <Text style={styles.txtArtist}>{art.artist}</Text>
                         </View>
-                        <View style={styles.buttonCont}>
-                            <View style={styles.button}>
-                                <Text style={styles.txtBtn}></Text>
-                                <FontAwesomeIcon icon={faAngleDoubleRight} size={20} color={"white"}  />
-                            </View>
+                        <View style={styles.button}>
+                            <Text style={styles.txtBtn}>scopri di più</Text>
+                            <FontAwesomeIcon icon={faAngleDoubleRight} size={20} color={"white"}/>
                         </View>
                     </View>
                 </View>
@@ -52,13 +49,13 @@ export default class Artwork extends Component {
     }
     render() {
         return (
-            <View style={{height: Dimensions.get('window').height}}>
+            <View style={{height: Dimensions.get('window').height, backgroundColor: '#ffffff'}}>
                 <StatusBar backgroundColor="#008000" barStyle="default" />
                 <Navbar left={ faAngleLeft } right={ faMapMarkedAlt }/>
                 <View style={styles.artistBar}>
                     <Text style={styles.artistProp}>Opere di {this.props.artist}</Text>
                 </View>
-                <ScrollView contentContainerStyle={{ alignItems: 'center', backgroundColor: '#f5f5f5', paddingBottom: 35}}>
+                <ScrollView contentContainerStyle={{ alignItems: 'center', backgroundColor: '#ffffff', paddingBottom: 35}}>
                     {this.list(this.props)}
                 </ScrollView>
             </View>
@@ -68,14 +65,17 @@ export default class Artwork extends Component {
 
 const styles = StyleSheet.create({
     artistBar: {
-        height: 40,
+        paddingVertical: 5,
         paddingHorizontal: '2.5%',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'red',
+        alignItems: 'center',
     },
     artistProp: {
         fontWeight: 'bold',
-        fontSize: 18,
-        textAlignVertical: 'center'
+        fontSize: 19,
+        textAlignVertical: 'center',
+        color: 'white'
     },
     box: {
         width: '94%',
@@ -94,15 +94,17 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     boxBottom: {
-        backgroundColor:'white',
+        backgroundColor:'rgba(255,255,255,0.3)',
         borderBottomLeftRadius: 25,
         borderBottomRightRadius: 25,
         flexDirection: 'row',
         width: '100%',
-        height: '40%',
         position: 'absolute',
         bottom: 0,
-        paddingLeft: 25,
+        paddingVertical: 5,
+        paddingHorizontal: 25,
+        justifyContent: 'center',
+        alignItems:'center'
     },
     buttonCont: {
         position: 'absolute',
@@ -141,9 +143,9 @@ const styles = StyleSheet.create({
         borderRadius: 25
     },
     txtArtwork: {
-        fontSize: 20,
-        color: 'black',
-        fontStyle: 'normal',
+        fontSize: 22,
+        color: 'white',
+        fontStyle: 'italic',
         fontWeight: 'bold'
     },
     txtArtist: {
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
     },
     txtBtn: {
         color: 'white',
-        paddingRight: 8
+        paddingRight: 8,
     },
     scrollContainer: {
         position: 'absolute',
@@ -162,6 +164,6 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0,
         width: '100%',
-        height: '100%'
+        height: '100%',
     },
 });
