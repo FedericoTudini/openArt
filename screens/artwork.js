@@ -6,10 +6,10 @@ import { StyleSheet,
     ImageBackground,
     TouchableOpacity,
     StatusBar,
-    Dimensions
+    Dimensions,
+    ScrollView
 } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { ScrollView } from 'react-native-gesture-handler';
 import Navbar from '../components/navbar.js';
 import { faAngleLeft, faAngleDoubleRight, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 

@@ -9,6 +9,7 @@ import { StyleSheet,
     Text,
     TouchableOpacity
     } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import Navbar from '../components/navbar.js';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faAngleLeft, faAngleDoubleRight, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
@@ -30,14 +31,14 @@ export default class ArtworkList extends Component {
         ];
         return artworks.filter(obj => obj.artist === this.props.artist).map(art => {
             return (
-                <TouchableOpacity key={art.key} style={styles.box}>
+                <TouchableOpacity key={art.key} style={styles.box} activeOpacity={0.7} >
                     <ImageBackground style={styles.img} imageStyle={{borderRadius: 25}} source={art.path}/>
                     <View style={styles.overlay}/>
                     <View style={styles.boxBottom}>
                         <View style={{flex:8, justifyContent: 'space-around', paddingBottom: 12, paddingTop: 8}}>
                             <Text style={styles.txtArtwork}>{art.name}</Text>
                         </View>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} activeOpacity={0.4}>
                             <Text style={styles.txtBtn}>scopri di più</Text>
                             <FontAwesomeIcon icon={faAngleDoubleRight} size={20} color={"white"}/>
                         </TouchableOpacity>
@@ -51,9 +52,13 @@ export default class ArtworkList extends Component {
             <View style={{height: Dimensions.get('window').height, backgroundColor: '#ffffff'}}>
                 <StatusBar backgroundColor="#008000" barStyle="default" />
                 <Navbar left={ faAngleLeft } right={ faMapMarkedAlt }/>
-                <View style={styles.artistBar}>
+                <LinearGradient
+                    style={styles.artistBar}
+                    colors={['#008783', '#39bfba']}
+                    start={{x: 0, y: 1}}
+                    end={{x: 1, y: 0}}>
                     <Text style={styles.artistProp}>Opere di {this.props.artist}</Text>
-                </View>
+                </LinearGradient>
                 <ScrollView contentContainerStyle={{ alignItems: 'center', backgroundColor: '#ffffff', paddingBottom: 35}}>
                     {this.list(this.props)}
                 </ScrollView>
@@ -67,8 +72,10 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         paddingHorizontal: '2.5%',
         justifyContent: 'center',
-        backgroundColor: '#4E5166',
         alignItems: 'center',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        overflow: 'hidden'
     },
     artistProp: {
         fontWeight: 'bold',
@@ -79,7 +86,7 @@ const styles = StyleSheet.create({
     },
     box: {
         width: '93%',
-        height: 180,
+        height: 150,
         borderRadius: 25,
         flexDirection: 'column',
         backgroundColor: 'white',

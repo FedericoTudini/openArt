@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, Image, View, Button } from 'react-native';
+import { StyleSheet, Text, Image, View, Button, TouchableOpacity, ImageBackground } from 'react-native';
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 import Search from './search.js';
 
@@ -9,9 +9,9 @@ class Map extends Component {
         this.list = this.list.bind(this);
         this.state = {
             artworks: [
-                {key : '1', artist: "Lucamaleonte", name: "D'Apres Gigi", latitude: 41.95002262447923, longitude: 12.534419526823307, path: require('../images/gigi.jpg')},
+                {key : '1', artist: "Lucamaleonte", name: "D'Apres Gigi (Gigi Proietti)", latitude: 41.95002262447923, longitude: 12.534419526823307, path: require('../images/gigi.jpg')},
                 {key : '2', artist: "JBRock", name: "Wall of Fame", latitude: 41.871876903038284, longitude: 12.477701978310407, path: require('../images/walloffame.jpg')},
-                {key : '3', artist: "Lucamaleonte", name: "Vecchio a chi? - Francesco Totti", latitude: 41.88252139793549, longitude: 12.504520351948631, path: require('../images/totti.jpg')},
+                {key : '3', artist: "Lucamaleonte", name: "Vecchio a chi? (Francesco Totti)", latitude: 41.88252139793549, longitude: 12.504520351948631, path: require('../images/totti.jpg')},
             ],
         };
       }
@@ -24,14 +24,8 @@ class Map extends Component {
                     coordinate = {{latitude : artwork.latitude, longitude: artwork.longitude}}
                     image = {require('../images/location-pin.png')}>
                         <Callout tooltip={true}>
-                            <View>
-                                <View style={styles.call}>
-                                    <Text>{artwork.name}</Text>
-                                    <Text>{artwork.artist}</Text>
-                                    <Button title='Scopri di più'/>
-                                </View>
-                                <View style={styles.arrowBorder} />
-                                <View style={styles.arrow} />
+                            <View >
+                                <ImageBackground  style={styles.img}  source={artwork.path}/>
                             </View>
                         </Callout>
                     </Marker>
@@ -59,6 +53,11 @@ const styles = StyleSheet.create({
     map: {
         height: '100%',
         width: '100%'
+    },
+    img: {
+        resizeMode: 'cover',
+        width: '100%',
+        height: '100%'
     },
     call: {
         flexDirection: 'column',

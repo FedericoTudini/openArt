@@ -1,17 +1,22 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Pressable, TouchableOpacity } from 'react-native';
 import { Image, Text } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function Navbar(props) {
   if(props.left && props.right)
   {
     return(
       <View style={styles.twoicons}>
-        <FontAwesomeIcon icon={props.left} size={40} color={"white"}  />
+        <TouchableOpacity>
+          <FontAwesomeIcon icon={props.left} size={40} color={"white"}  />
+        </TouchableOpacity>
         <Image source={require('../images/logoWhite.png')} style={styles.logo}/>
-        <FontAwesomeIcon icon={props.right} size={40} color={"white"} />
+        <TouchableOpacity>
+          <FontAwesomeIcon icon={props.right} size={40} color={"white"}  />
+        </TouchableOpacity>
       </View>
     )
   }
@@ -19,7 +24,9 @@ export default function Navbar(props) {
   {
     return(
       <View style={styles.leftonly}>
-        <FontAwesomeIcon icon={props.left} size={40} color={"white"} />
+        <TouchableOpacity>
+          <FontAwesomeIcon icon={props.left} size={40} color={"white"}  />
+        </TouchableOpacity>
         <Image source={require('../images/logoWhite.png')} style={styles.logo}/>
         <FontAwesomeIcon icon={props.left} size={0} color={"white"} style={{opacity: 0}} />
       </View>
@@ -31,7 +38,9 @@ export default function Navbar(props) {
       <View style={styles.leftonly}>
         <FontAwesomeIcon icon={props.right} size={0} color={"white"} style={{opacity: 0}}/>
         <Image source={require('../images/logoWhite.png')} style={styles.logo}/>
-        <FontAwesomeIcon icon={props.right} size={40} color={"white"} />
+        <TouchableOpacity>
+          <FontAwesomeIcon icon={props.right} size={40} color={"white"}  />
+        </TouchableOpacity>
       </View>
     )
   }

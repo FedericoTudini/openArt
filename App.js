@@ -7,7 +7,7 @@ import Home from './screens/home.js';
 export default function App() {
   return(
     <View>
-      <Artwork artist='JBRock' name='Wall of Fame' path={require('./images/walloffame.jpg')} />
+      <Home />
     </View>
   );
 };
