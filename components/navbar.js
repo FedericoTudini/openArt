@@ -47,17 +47,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 65,
     backgroundColor: '#008000',
-    shadowColor: "#222222",
     alignItems: 'center',
-    justifyContent: 'center',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.30,
-    shadowRadius: 2.81,
-
-    elevation: 2,
+    justifyContent: 'center'
   },
   twoicons: {
     flexDirection: 'row',
