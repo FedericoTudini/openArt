@@ -16,8 +16,9 @@ export default class Search extends Component {
         return (
             <SearchBar 
                 placeholder = "Cerca un'opera, un artista, un indirizzo..."
+                placeholderTextColor= "#202c3e"
                 onChangeText={this.updateSearch}
-                lightTheme = {true}
+                lightTheme={true}
                 inputContainerStyle={styles.containerSearch}
                 containerStyle={styles.cont}
                 value={search}
@@ -30,7 +31,10 @@ const styles = StyleSheet.create({
     containerSearch: {
         opacity: 1,
         borderRadius: 30,
-        backgroundColor: '#ffffff'
+    },
+    cont: {
+        borderBottomWidth: 0,
+        borderTopWidth: 0
     }
 })
   

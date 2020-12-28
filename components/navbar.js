@@ -55,14 +55,14 @@ const styles = StyleSheet.create({
   navbar: {
     flexDirection: 'row',
     height: 65,
-    backgroundColor: '#008000',
+    backgroundColor: "#202c3e",
     alignItems: 'center',
     justifyContent: 'center'
   },
   twoicons: {
     flexDirection: 'row',
     height: 65,
-    backgroundColor: '#008000',
+    backgroundColor: "#202c3e",
     shadowColor: "#222222",
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   leftonly: {
     flexDirection: 'row',
     height: 65,
-    backgroundColor: '#008000',
+    backgroundColor: '#ff0000',
     shadowColor: "#222222",
     alignItems: 'center',
     justifyContent: 'space-between',

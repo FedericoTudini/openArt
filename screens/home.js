@@ -7,7 +7,7 @@ import Search from '../components/search.js';
 export default function Home() {
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#008000" barStyle="default" />
+      <StatusBar backgroundColor="#202c3e" barStyle="default" />
       <Navbar />
       <Search />
       <Map />

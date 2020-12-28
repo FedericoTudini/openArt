@@ -19,7 +19,7 @@ export default class ArtworkList extends Component {
         super(props);
         this.list = this.list.bind(this);
     }
-    list = (props) => {
+    list = () => {
         var artworks = [
             {key : '1', artist: "Lucamaleonte", name: "D'Apres Gigi (Gigi Proietti)", latitude: 41.95002262447923, longitude: 12.534419526823307, path: require('../images/gigi.jpg')},
             {key : '2', artist: "JBRock", name: "Wall of Fame", latitude: 41.871876903038284, longitude: 12.477701978310407, path: require('../images/walloffame.jpg')},
