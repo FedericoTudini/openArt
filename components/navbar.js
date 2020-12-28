@@ -39,7 +39,7 @@ export default function Navbar(props) {
         <FontAwesomeIcon icon={props.right} size={0} color={"white"} style={{opacity: 0}}/>
         <Image source={require('../images/logoWhite.png')} style={styles.logo}/>
         <TouchableOpacity>
-          <FontAwesomeIcon icon={props.right} size={40} color={"white"}  />
+          <FontAwesomeIcon icon={props.right} size={20} color={"white"}  />
         </TouchableOpacity>
       </View>
     )
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   leftonly: {
     flexDirection: 'row',
     height: 65,
-    backgroundColor: '#ff0000',
+    backgroundColor: '#202c3e',
     shadowColor: "#222222",
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.81,
 
     elevation: 2,
-    paddingHorizontal: 10
+    paddingHorizontal: 15
   },
   logo : {
     height: '60%',

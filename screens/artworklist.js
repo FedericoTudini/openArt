@@ -12,7 +12,7 @@ import { StyleSheet,
 import { LinearGradient } from 'expo-linear-gradient';
 import Navbar from '../components/navbar.js';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faAngleLeft, faAngleDoubleRight, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt, faAngleLeft, faAngleDoubleRight, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default class ArtworkList extends Component {
     constructor(props) {
@@ -36,11 +36,10 @@ export default class ArtworkList extends Component {
                     <View style={styles.overlay}/>
                     <View style={styles.boxBottom}>
                         <View style={{flex:8, justifyContent: 'space-around', paddingBottom: 12, paddingTop: 8}}>
-                            <Text style={styles.txtArtwork}>{art.name}</Text>
+                            <Text numberOfLines={1} style={styles.txtArtwork}>{art.name}</Text>
                         </View>
                         <TouchableOpacity style={styles.button} activeOpacity={0.4}>
-                            <Text style={styles.txtBtn}>scopri di più</Text>
-                            <FontAwesomeIcon icon={faAngleDoubleRight} size={20} color={"white"}/>
+                            <FontAwesomeIcon icon={faMapMarkerAlt} size={25} color={"white"}/>
                         </TouchableOpacity>
                     </View>
                 </TouchableOpacity>
@@ -49,8 +48,8 @@ export default class ArtworkList extends Component {
     }
     render() {
         return (
-            <View style={{height: Dimensions.get('window').height, backgroundColor: '#ffffff'}}>
-                <StatusBar backgroundColor="#008000" barStyle="default" />
+            <View style={{height: Dimensions.get('window').height, backgroundColor: '#193A55'}}>
+                <StatusBar backgroundColor="#202c3e" barStyle="default" />
                 <Navbar left={ faAngleLeft } right={ faMapMarkedAlt }/>
                 <LinearGradient
                     style={styles.artistBar}
@@ -59,7 +58,7 @@ export default class ArtworkList extends Component {
                     end={{x: 1, y: 0}}>
                     <Text style={styles.artistProp}>Opere di {this.props.artist}</Text>
                 </LinearGradient>
-                <ScrollView contentContainerStyle={{ alignItems: 'center', backgroundColor: '#ffffff', paddingBottom: 35}}>
+                <ScrollView contentContainerStyle={{ alignItems: 'center', backgroundColor: '#193A55', paddingBottom: 35}}>
                     {this.list(this.props)}
                 </ScrollView>
             </View>
@@ -73,8 +72,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: '2.5%',
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
         overflow: 'hidden'
     },
     artistProp: {
@@ -110,6 +107,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         alignItems:'center',
         paddingHorizontal: 25,
+        paddingVertical: 5,
         justifyContent: 'center',
         alignItems:'center'
     },
@@ -119,12 +117,20 @@ const styles = StyleSheet.create({
         bottom: 10
     },
     button: {
-        height: 30,
-        borderRadius: 15,
-        paddingHorizontal: 10,
-        backgroundColor: 'red',
+        backgroundColor: '#5ee086',
         alignItems: 'center',
         flexDirection: 'row',
+        justifyContent: 'center',
+        padding: 7,
+        borderRadius: 100,
+        shadowColor: "#000000",
+        shadowOffset: {
+        width: 0,
+        height: 1,
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 2.81,
+        elevation: 5
     },
     imgContainer: {
         borderTopLeftRadius: 25,
@@ -152,7 +158,8 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: 'white',
         fontStyle: 'italic',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        paddingRight: 10
     },
     txtArtist: {
         fontSize: 18,

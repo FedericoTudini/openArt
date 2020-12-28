@@ -12,7 +12,7 @@ const h = image.height;
 export default function ImgView(props) {
   return (
     <View style={styles.container}>
-        <StatusBar backgroundColor='#008000' barStyle='light-content' />
+        <StatusBar backgroundColor='#202c3e' barStyle='light-content' />
         
         <View style={{flexDirection: 'column'}}>
             <TouchableOpacity style={styles.topBar} activeOpacity={0.5}>

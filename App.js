@@ -8,7 +8,7 @@ import Zoom from './screens/imgview.js';
 export default function App() {
   return(
     <View>
-      <Home />
+      <Zoom artist='JBRock'/>
     </View>
   );
 };

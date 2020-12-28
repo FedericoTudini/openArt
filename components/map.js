@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, Image, View, Button, TouchableOpacity, ImageBackground } from 'react-native';
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
-import WebView from 'react-native-web'
-import Search from './search.js';
 import {Svg, Image as ImageSvg} from 'react-native-svg';
 
 class Map extends Component {
@@ -19,22 +17,34 @@ class Map extends Component {
       }
     list () {
         return this.state.artworks.map(artwork => {
+            const url = artwork.path
+            const image = Image.resolveAssetSource(url)
+            const w = image.width;
+            const h = image.height;
             return (
                     <Marker 
                     key = {artwork.key} 
                     style = {styles.mark}
                     coordinate = {{latitude : artwork.latitude, longitude: artwork.longitude}}
                     image = {require('../images/location-pin.png')}>
-                        <Callout tooltip={true}>
-                            <View style={styles.call}>
-                                <Svg >
-                                    <ImageSvg
-                                        width={'100%'} 
-                                        height={'100%'}
-                                        href={artwork.path}
-                                    />
-                                </Svg>
-                            <View style={styles.boxBottom}/>
+                        <Callout tooltip={true} >
+                            <View>
+                                <View style={styles.callV} >
+                                    <View style={{flex:2}}>
+                                        <Svg >
+                                            <ImageSvg
+                                                width={'100%'} 
+                                                height={'100%'}
+                                                href={artwork.path}
+                                                style={styles.img}
+                                            />
+                                        </Svg>
+                                    </View>
+                                    <View style={{flex:1}}>
+                                        <Text numberOfLines={2} style={{textAlign: 'center', alignSelf:'center', fontSize: 14, fontWeight:'bold'}}>{artwork.name}</Text>
+                                        <Text style={{textAlign: 'center', alignSelf:'center', fontStyle: 'italic'}}>{artwork.artist}</Text>
+                                    </View>
+                                </View>
                             </View>
                         </Callout>
                     </Marker>
@@ -59,9 +69,6 @@ class Map extends Component {
     }
 }
 const styles = StyleSheet.create({
-    mark: {
-        maxHeight:30,
-    },
     map: {
         height: '100%',
         width: '100%'
@@ -74,42 +81,34 @@ const styles = StyleSheet.create({
         height: 50,
     },
     img: {
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         width: '100%',
-        height: '100%'
-    },
-    overlay: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'rgba(0,0,0,0.2)',
-        borderRadius: 25
+        height: '100%',
     },
     call: {
+        backgroundColor: '#fff',
+        width: 240,
+        height: 165,
+        marginBottom: 8,
+        borderRadius: 20,
+        padding: 15
+    },
+    callH: {
         backgroundColor: '#fff',
         width: 215,
         height: 165,
         marginBottom: 8,
+        borderRadius: 20,
+        padding: 15
     },
-    arrow: {
-        backgroundColor: 'transparent',
-        borderColor: 'transparent',
-        borderTopColor: '#fff',
-        borderWidth: 16,
-        alignSelf: 'center',
-        marginTop: -32,
-      },
-      arrowBorder: {
-        backgroundColor: 'transparent',
-        borderColor: 'transparent',
-        borderTopColor: '#007a87',
-        borderWidth: 16,
-        alignSelf: 'center',
-        marginTop: -0.5,
-        // marginBottom: -15
-      },
+    callV: {
+        backgroundColor: '#fff',
+        width: 195,
+        height: 225,
+        borderRadius: 20,
+        padding: 9,
+        marginBottom: 7
+    },
 });
 
 const generatedMapStyle = [
