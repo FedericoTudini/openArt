@@ -8,9 +8,6 @@ import { useNavigation } from '@react-navigation/native'
 
 export default function Navbar(props) {
   const navigation = useNavigation();
-  onpr = () => {
-    navigation.goBack();
-  }
   if(props.left && props.right)
   {
     return(
@@ -20,7 +17,7 @@ export default function Navbar(props) {
         </TouchableOpacity>
         <Image source={require('../images/logoWhite.png')} style={styles.logo}/>
         <TouchableOpacity>
-          <FontAwesomeIcon icon={props.right} size={40} color={"white"}  />
+          <FontAwesomeIcon icon={props.right} size={40} color={"white"}  onPress={() => navigation.navigate('Home')}/>
         </TouchableOpacity>
       </View>
     )

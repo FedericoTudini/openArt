@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Dimensions, StatusBar,Text, ScrollView, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, Dimensions, StatusBar,Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { faAngleLeft, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../components/navbar.js';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -18,11 +18,19 @@ export default function Search({navigation, route}) {
                 colors={['#193A55', '#202c3e']}
                 start={{x: 0.5, y: 0}}
                 end={{x: 0.5, y: 1}}>
-                    <View style={{backgroundColor:'white', width: 220, height: 220}}></View>
-                    <Text style={{fontSize : 40, color: 'white', marginVertical: 25}}>{artist}</Text>
+                    <View style={styles.imgCont}>
+                        <Image style={styles.img}  source={require('../images/jbrock.jpg')} />
+                    </View>
+                    <LinearGradient 
+                        style={{marginVertical: 20, width: Dimensions.get('window').width, justifyContent: 'center', alignItems: 'center'}}
+                        colors={['#20BF55', '#01BAEF']}
+                        start={{x: 0, y: 0}}
+                        end={{x: 1, y: 1}}>
+                            <Text style={{fontSize : 40, color: 'white', marginVertical: 15, fontFamily: 'Montserrat_600SemiBold'}}>{artist}</Text>
+                        </LinearGradient>
                     <View>
-                        <Text style={{fontSize : 16, color: 'white'}}>Biografia dell'artista:</Text>
-                        <Text style={{fontSize : 19, color: 'white'}}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</Text>
+                        <Text style={{fontSize : 19, color: 'white'}}>Biografia dell'artista:</Text>
+                        <Text style={{fontSize : 16, color: 'white'}}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</Text>
                     </View>
                     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ArtworkList', {artist: artist})}>
                         <FontAwesomeIcon icon={faPalette} size={25} color={"white"}/>
@@ -61,6 +69,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
+    },
+    img: {
+        resizeMode: 'cover',
+        width: '100%',
+        height: '100%',
+        borderRadius: 20,
+    },
+    imgCont: {
+        backgroundColor:'white', 
+        width: 270, 
+        height: 270, 
+        borderRadius: 20,
+        alignItems: 'center',
+        shadowColor: "#000000",
+        shadowOffset: {
+        width: 1,
+        height: 2,
+        },
+        shadowOpacity: 0.7,
+        shadowRadius: 2.81,
+        elevation: 5
     }
 })
   

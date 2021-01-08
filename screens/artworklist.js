@@ -16,11 +16,8 @@ import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/
 import { createStackNavigator} from '@react-navigation/stack';
 import { faMapMarkerAlt, faAngleLeft, faAngleDoubleRight, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 
-class ArtworkList extends Component {
-    constructor(props) {
-        super(props);
-        this.list = this.list.bind(this);
-    }
+export default function ArtworkList({navigation, route}) {
+    const { name, artist, path } = route.params;
     list = () => {
         var artworks = [
             {key : '1', artist: "Lucamaleonte", name: "D'Apres Gigi (Gigi Proietti)", latitude: 41.95002262447923, longitude: 12.534419526823307, path: require('../images/gigi.jpg')},
@@ -31,41 +28,40 @@ class ArtworkList extends Component {
             {key : '6', artist: "JBRock", name: "Wall of Fame", latitude: 41.871876903038284, longitude: 12.477701978310407, path: require('../images/walloffame.jpg')},
             {key : '7', artist: "JBRock", name: "Wall of Fame", latitude: 41.871876903038284, longitude: 12.477701978310407, path: require('../images/walloffame.jpg')},
         ];
-        return artworks.filter(obj => obj.artist === this.props.artist).map(art => {
+        return artworks.filter(obj => obj.artist === artist).map(art => {
             return (
-                <TouchableOpacity key={art.key} style={styles.box} activeOpacity={0.7} >
+                <TouchableOpacity key={art.key} style={styles.box} activeOpacity={0.7} onPress={() => navigation.navigate('Artwork', {artist: artist, name: name, path: art.path})}>
                     <ImageBackground style={styles.img} imageStyle={{borderRadius: 25}} source={art.path}/>
                     <View style={styles.overlay}/>
                     <View style={styles.boxBottom}>
                         <View style={{flex:8, justifyContent: 'space-around', paddingBottom: 12, paddingTop: 8}}>
                             <Text numberOfLines={1} style={styles.txtArtwork}>{art.name}</Text>
                         </View>
-                        <TouchableOpacity style={styles.button} activeOpacity={0.4}>
-                            <FontAwesomeIcon icon={faMapMarkerAlt} size={25} color={"white"}/>
+                        <TouchableOpacity style={styles.button} activeOpacity={0.4} >
+                            <FontAwesomeIcon icon={faMapMarkerAlt} size={25} color={"white"} onPress={() => navigation.navigate('Home')}/>
                         </TouchableOpacity>
                     </View>
                 </TouchableOpacity>
             )
         })
     }
-    render() {
-        return (
-            <View style={{height: Dimensions.get('window').height, backgroundColor: '#193A55'}}>
-                <StatusBar backgroundColor="#202c3e" barStyle="default" />
-                <Navbar left={ faAngleLeft } right={ faMapMarkedAlt }/>
-                <LinearGradient
-                    style={styles.artistBar}
-                    colors={['#008783', '#39bfba']}
-                    start={{x: 0, y: 1}}
-                    end={{x: 1, y: 0}}>
-                    <Text style={styles.artistProp}>Opere di {this.props.artist}</Text>
-                </LinearGradient>
-                <ScrollView contentContainerStyle={{ alignItems: 'center', backgroundColor: '#193A55', paddingBottom: 35}}>
-                    {this.list(this.props)}
-                </ScrollView>
-            </View>
+    return (
+        <View style={{height: Dimensions.get('window').height, backgroundColor: '#193A55'}}>
+            <StatusBar backgroundColor="#202c3e" barStyle="default" />
+            <Navbar left={ faAngleLeft } right={ faMapMarkedAlt }/>
+            <LinearGradient
+                style={styles.artistBar}
+                colors={['#008783', '#39bfba']}
+                start={{x: 0, y: 1}}
+                end={{x: 1, y: 0}}>
+                <Text style={styles.artistProp}>Opere di {artist}</Text>
+            </LinearGradient>
+            <ScrollView contentContainerStyle={{ alignItems: 'center', backgroundColor: '#193A55', paddingBottom: 35}}>
+                {list()}
+            </ScrollView>
+        </View>
         );
-    }
+    
 }
 
 const styles = StyleSheet.create({
@@ -183,9 +179,3 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 });
-
-export default function(props) {
-    const navigation = useNavigation();
-    const route = useRoute();  
-    return <ArtworkList {...props} navigation={navigation} route={route} />;
-}

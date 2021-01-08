@@ -59,12 +59,12 @@ export default function Artwork({navigation, route}) {
                                 </TouchableOpacity>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{marginVertical: 15, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}} >
+                        <TouchableOpacity style={{marginVertical: 15, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}} onPress={() => navigation.navigate('ArtworkList', {artist: artist})}>
                             <View>
-                                <Text style={styles.txt}>Vedi altre opere dell'artista</Text>
+                                <Text style={styles.txt} >Vedi altre opere dell'artista</Text>
                             </View>
                             <View>
-                                <TouchableOpacity style={styles.button} activeOpacity={0.4}>
+                                <TouchableOpacity style={styles.button} activeOpacity={0.4} onPress={() => navigation.navigate('ArtworkList', {artist: artist})}>
                                     <FontAwesomeIcon icon={faPalette} size={25} color={"white"}/>
                                 </TouchableOpacity>
                             </View>

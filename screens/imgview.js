@@ -16,7 +16,7 @@ export default function ImgView({route, navigation}) {
         <StatusBar backgroundColor='#202c3e' barStyle='light-content' />
         <View style={{flexDirection: 'column'}}>
             <TouchableOpacity onPress={() => navigation.goBack()} style={styles.topBar} >
-                    <FontAwesomeIcon icon={faArrowLeft} size={30} color={"#202c3e"} />
+                    <FontAwesomeIcon icon={faArrowLeft} size={30} color={"#202c3e"} onPress={() => navigation.goBack()}/>
             </TouchableOpacity>
             <ImageZoom style={{bottom: 25}} cropWidth={Dimensions.get('window').width} cropHeight={Dimensions.get('window').height} imageWidth={w} imageHeight={h}>
                 <Image style={styles.img} width={w} height={h} source={path}/>
@@ -34,7 +34,9 @@ const styles = StyleSheet.create({
     topBar: {
         position: 'absolute',
         top: 25,
-        left: 25
+        left: 25,
+        width: '100%',
+        height:'100%'
     },
     img: {
         alignSelf: 'center',
