@@ -9,20 +9,18 @@ const url = require('../images/gigi.jpg')
 const image = Image.resolveAssetSource(url)
 const w = image.width;
 const h = image.height;
-export default function ImgView(props) {
+export default function ImgView({route, navigation}) {
+    const { path } = route.params;
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor='#202c3e' barStyle='light-content' />
-        
         <View style={{flexDirection: 'column'}}>
-            <TouchableOpacity style={styles.topBar} activeOpacity={0.5}>
-                <FontAwesomeIcon icon={faArrowLeft} size={30} color={"black"}/>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.topBar} >
+                    <FontAwesomeIcon icon={faArrowLeft} size={30} color={"#202c3e"} />
             </TouchableOpacity>
-            <View>
-                <ImageZoom style={{bottom: 25}} cropWidth={Dimensions.get('window').width} cropHeight={Dimensions.get('window').height} imageWidth={w} imageHeight={h}>
-                    <Image style={styles.img} width={w} height={h} source={require('../images/gigi.jpg')}/>
-                </ImageZoom>
-            </View>
+            <ImageZoom style={{bottom: 25}} cropWidth={Dimensions.get('window').width} cropHeight={Dimensions.get('window').height} imageWidth={w} imageHeight={h}>
+                <Image style={styles.img} width={w} height={h} source={path}/>
+            </ImageZoom>
         </View>
     </View>
   );

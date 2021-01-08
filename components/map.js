@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, Image, View, Button, TouchableOpacity, ImageBackground } from 'react-native';
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 import {Svg, Image as ImageSvg} from 'react-native-svg';
+import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
+import { createStackNavigator} from '@react-navigation/stack';
 
 class Map extends Component {
     constructor () {
@@ -27,7 +29,7 @@ class Map extends Component {
                     style = {styles.mark}
                     coordinate = {{latitude : artwork.latitude, longitude: artwork.longitude}}
                     image = {require('../images/location-pin.png')}>
-                        <Callout tooltip={true} >
+                        <Callout tooltip={true} onPress = {() => this.props.navigation.navigate('Artwork',{name: artwork.name, artist : artwork.artist, path: artwork.path})}>
                             <View>
                                 <View style={styles.callV} >
                                     <View style={{flex:2}}>
@@ -52,6 +54,7 @@ class Map extends Component {
         });
     };
     render () {
+        const { navigation } = this.props;
         return (
             <MapView
               style = {styles.map}
@@ -250,5 +253,8 @@ const generatedMapStyle = [
 ]
 
 
-
-export default Map;
+export default function(props) {
+    const navigation = useNavigation();
+    const route = useRoute();  
+    return <Map {...props} navigation={navigation} route={route} />;
+}

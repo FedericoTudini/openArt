@@ -12,9 +12,11 @@ import { StyleSheet,
 import { LinearGradient } from 'expo-linear-gradient';
 import Navbar from '../components/navbar.js';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
+import { createStackNavigator} from '@react-navigation/stack';
 import { faMapMarkerAlt, faAngleLeft, faAngleDoubleRight, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 
-export default class ArtworkList extends Component {
+class ArtworkList extends Component {
     constructor(props) {
         super(props);
         this.list = this.list.bind(this);
@@ -181,3 +183,9 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 });
+
+export default function(props) {
+    const navigation = useNavigation();
+    const route = useRoute();  
+    return <ArtworkList {...props} navigation={navigation} route={route} />;
+}

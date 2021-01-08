@@ -3,15 +3,20 @@ import { StyleSheet, View, Pressable, TouchableOpacity } from 'react-native';
 import { Image, Text } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+import { useNavigation } from '@react-navigation/native'
 
 
 export default function Navbar(props) {
+  const navigation = useNavigation();
+  onpr = () => {
+    navigation.goBack();
+  }
   if(props.left && props.right)
   {
     return(
       <View style={styles.twoicons}>
         <TouchableOpacity>
-          <FontAwesomeIcon icon={props.left} size={40} color={"white"}  />
+          <FontAwesomeIcon icon={props.left} size={40} color={"white"}  onPress={() => navigation.goBack()}/>
         </TouchableOpacity>
         <Image source={require('../images/logoWhite.png')} style={styles.logo}/>
         <TouchableOpacity>
