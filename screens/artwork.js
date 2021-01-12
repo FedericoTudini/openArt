@@ -51,7 +51,7 @@ export default function Artwork({navigation, route}) {
                         </View>
                         <TouchableOpacity style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}} onPress={ () => navigation.navigate('Bio', {artist : artist})}>
                             <View>
-                                <Text style={styles.txt}>Leggi la bio dell'artista</Text>
+                                <Text style={styles.txt}>Leggi la pagina dell'artista</Text>
                             </View>
                             <View>
                                 <TouchableOpacity style={styles.button} activeOpacity={0.4} onPress={() => navigation.navigate('Bio', {artist : artist})}>

@@ -41,7 +41,7 @@ export default function Navbar(props) {
         <FontAwesomeIcon icon={props.right} size={0} color={"white"} style={{opacity: 0}}/>
         <Image source={require('../images/logoWhite.png')} style={styles.logo}/>
         <TouchableOpacity>
-          <FontAwesomeIcon icon={props.right} size={20} color={"white"}  />
+          <FontAwesomeIcon icon={props.right} size={20} color={"white"} onPress={() => navigation.navigate('Add')} />
         </TouchableOpacity>
       </View>
     )

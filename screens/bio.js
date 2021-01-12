@@ -26,10 +26,10 @@ export default function Search({navigation, route}) {
                         colors={['#20BF55', '#01BAEF']}
                         start={{x: 0, y: 0}}
                         end={{x: 1, y: 1}}>
-                            <Text style={{fontSize : 40, color: 'white', marginVertical: 15, fontFamily: 'Montserrat_600SemiBold'}}>{artist}</Text>
+                            <Text style={{fontSize : 40, color: 'white', marginVertical: 15, fontWeight: 'bold'}}>{artist}</Text>
                         </LinearGradient>
                     <View>
-                        <Text style={{fontSize : 19, color: 'white'}}>Biografia dell'artista:</Text>
+                        <Text style={{fontSize : 19, color: 'white'}}>Info sull'artista:</Text>
                         <Text style={{fontSize : 16, color: 'white'}}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</Text>
                     </View>
                     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ArtworkList', {artist: artist})}>
