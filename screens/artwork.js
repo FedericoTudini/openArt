@@ -17,7 +17,7 @@ import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/
 import { createStackNavigator} from '@react-navigation/stack';
 
 export default function Artwork({navigation, route}) {
-        const { name, artist, path } = route.params;
+        const { name, artist, path, latitude, longitude } = route.params;
         return (
             <View style={{height: Dimensions.get('window').height, width: Dimensions.get('window').width, backgroundColor: '#ffffff'}}>
                 <StatusBar backgroundColor="#202c3e" barStyle="default" />
@@ -38,17 +38,17 @@ export default function Artwork({navigation, route}) {
                             <Text style={styles.txt}>Artista: {artist}</Text>
                         </View>
                         <Text style={styles.txt2}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</Text>
-                        <View style={{marginVertical: 15, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}} >
+                        <TouchableOpacity style={{marginVertical: 15, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}} onPress={() => navigation.navigate('Home', {longitude: longitude, latitude: latitude })}>
                             <View>
                                 <Text style={styles.txt}>Indirizzo:</Text>
                                 <Text style={styles.txt2}>Via Tonale, 6, Roma</Text>
                             </View>
                             <View>
-                                <TouchableOpacity style={styles.button} activeOpacity={0.4}>
+                                <TouchableOpacity style={styles.button} activeOpacity={0.4} onPress={() => navigation.navigate('Home', {longitude: longitude, latitude: latitude })}>
                                     <FontAwesomeIcon icon={faMapMarkerAlt} size={25} color={"white"}/>
                                 </TouchableOpacity>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                         <TouchableOpacity style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}} onPress={ () => navigation.navigate('Bio', {artist : artist})}>
                             <View>
                                 <Text style={styles.txt}>Leggi la pagina dell'artista</Text>

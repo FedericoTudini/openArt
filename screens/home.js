@@ -9,13 +9,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 
 export default function Home({navigation, route}) {
-
+  const { latitude, longitude } = route.params;
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#202c3e" barStyle="default" />
       <Navbar right={ faPlus }/>
       <Search />
-      <Map />
+      <Map latitude={latitude} longitude={longitude}/>
     </View>
   );
 }

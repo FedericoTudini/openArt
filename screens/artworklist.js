@@ -38,7 +38,7 @@ export default function ArtworkList({navigation, route}) {
                             <Text numberOfLines={1} style={styles.txtArtwork}>{art.name}</Text>
                         </View>
                         <TouchableOpacity style={styles.button} activeOpacity={0.4} >
-                            <FontAwesomeIcon icon={faMapMarkerAlt} size={25} color={"white"} onPress={() => navigation.navigate('Home')}/>
+                            <FontAwesomeIcon icon={faMapMarkerAlt} size={25} color={"white"} onPress={() => navigation.navigate('Home', {longitude: art.longitude, latitude: art.latitude })}/>
                         </TouchableOpacity>
                     </View>
                 </TouchableOpacity>

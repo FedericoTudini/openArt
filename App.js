@@ -18,7 +18,7 @@ export default class App extends Component {
       return(
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
-                <Stack.Screen name="Home" component={Home} initialParams={{ modal: false }}/>
+                <Stack.Screen name="Home" component={Home} initialParams={{ modal: false, longitude: 12.477701978310407, latitude: 41.871876903038284 }}/>
                 <Stack.Screen name="Artwork" component={Artwork} />
                 <Stack.Screen name="ArtworkList" component={ArtworkList} />
                 <Stack.Screen name="Zoom" component={Zoom} />

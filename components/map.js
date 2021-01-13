@@ -29,7 +29,7 @@ class Map extends Component {
                     style = {styles.mark}
                     coordinate = {{latitude : artwork.latitude, longitude: artwork.longitude}}
                     image = {require('../images/location-pin.png')}>
-                        <Callout tooltip={true} onPress = {() => this.props.navigation.navigate('Artwork',{name: artwork.name, artist : artwork.artist, path: artwork.path})}>
+                        <Callout tooltip={true} onPress = {() => this.props.navigation.navigate('Artwork',{name: artwork.name, artist : artwork.artist, path: artwork.path, longitude : artwork.longitude, latitude : artwork.latitude})}>
                             <View>
                                 <View style={styles.callV} >
                                     <View style={{flex:2}}>
@@ -54,15 +54,14 @@ class Map extends Component {
         });
     };
     render () {
-        const { navigation } = this.props;
         return (
             <MapView
               style = {styles.map}
               customMapStyle = { generatedMapStyle }
               provider={PROVIDER_GOOGLE}
               region={{
-                latitude: 41.871876903038284,
-                longitude: 12.477701978310407,
+                latitude: this.props.latitude,
+                longitude: this.props.longitude,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}>
