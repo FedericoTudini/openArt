@@ -6,8 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPalette } from '@fortawesome/free-solid-svg-icons';
 
-export default function Search({navigation, route}) {
-    const { artist } = route.params;
+export default function Bio({navigation, route}) {
+    const { artist, pathArtist } = route.params;
     return (
         <View style={{height: Dimensions.get('window').height, width: Dimensions.get('window').width, backgroundColor: '#ffffff'}}>
             <StatusBar backgroundColor="#202c3e" barStyle="default" />
@@ -19,7 +19,7 @@ export default function Search({navigation, route}) {
                 start={{x: 0.5, y: 0}}
                 end={{x: 0.5, y: 1}}>
                     <View style={styles.imgCont}>
-                        <Image style={styles.img}  source={require('../images/jbrock.jpg')} />
+                        <Image style={styles.img}  source={pathArtist} />
                     </View>
                     <LinearGradient 
                         style={{marginVertical: 20, width: Dimensions.get('window').width, justifyContent: 'center', alignItems: 'center'}}
@@ -27,9 +27,8 @@ export default function Search({navigation, route}) {
                         start={{x: 0, y: 0}}
                         end={{x: 1, y: 1}}>
                             <Text style={{fontSize : 40, color: 'white', marginVertical: 15, fontWeight: 'bold'}}>{artist}</Text>
-                        </LinearGradient>
+                    </LinearGradient>
                     <View>
-                        <Text style={{fontSize : 19, color: 'white'}}>Info sull'artista:</Text>
                         <Text style={{fontSize : 16, color: 'white'}}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</Text>
                     </View>
                     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ArtworkList', {artist: artist})}>

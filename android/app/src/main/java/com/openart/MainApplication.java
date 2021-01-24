@@ -1,5 +1,8 @@
 package com.openart;
 
+
+import com.openart.generated.BasePackageList;
+
 import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
@@ -36,6 +39,8 @@ public class MainApplication extends Application implements ReactApplication {
     new BasePackageList().getPackageList()
   );
 
+  private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(new BasePackageList().getPackageList(), null);
+
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
@@ -48,6 +53,19 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new ModuleRegistryAdapter(mModuleRegistryProvider));
       return packages;
     }
+
+    @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+          new MapsPackage()
+      );
+    }
+    // Add unimodules
+    List<ReactPackage> unimodules = Arrays.<ReactPackage>asList(
+      new ModuleRegistryAdapter(mModuleRegistryProvider)
+    );
+    packages.addAll(unimodules);
 
     @Override
     protected String getJSMainModuleName() {

@@ -29,18 +29,3 @@ export default class App extends Component {
       );
   }
 }
-
-/*
-
-
-<NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Artwork" component={Artwork} />
-        <Stack.Screen name="ArtworkList" component={ArtworkList} />
-        <Stack.Screen name="Zoom" component={Zoom} />
-        <Stack.Screen name="Bio" component={Bio} />
-      </Stack.Navigator>
-    </NavigationContainer>
-
-*/

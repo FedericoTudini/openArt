@@ -18,6 +18,11 @@ export default function Add({navigation, route}) {
                 visible={isVisible}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
+                        <View style={{position: 'absolute', right: 10, top: 10}}>
+                            <TouchableOpacity onPress={() => setVisible(!isVisible)}>
+                                <FontAwesomeIcon icon={faTimes}  color={'red'} size={30}/>
+                            </TouchableOpacity>
+                        </View>
                         <FontAwesomeIcon icon={faCheckCircle} color={'green'} size={50}/>
                         <Text style={{color: '#202c3e', fontSize: 20, fontStyle: 'italic', fontWeight:'bold'}}>Grazie!</Text>
                         <View width={150} style={{justifyContent: 'center', alignItems:'center', marginVertical: 8}}>
@@ -26,9 +31,6 @@ export default function Add({navigation, route}) {
                         <TouchableHighlight style={{...styles.btn, width: 120}} onPress={() => navigation.navigate('Home')}>
                             <Text style={{color: 'white', fontSize: 15}}>HOME</Text>
                         </TouchableHighlight>
-                        <TouchableOpacity onPress={() => setVisible(!isVisible)}>
-                            <FontAwesomeIcon icon={faTimes} style={{marginTop: 10}} color={'red'} size={35}/>
-                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
