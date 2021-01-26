@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, Image, View, Button, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Text, Image, View, Button, TouchableOpacity,Dimensions, ImageBackground } from 'react-native';
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 import {Svg, Image as ImageSvg} from 'react-native-svg';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
 import { createStackNavigator} from '@react-navigation/stack';
+
+const {width, height} = Dimensions.get('window')
+
+const SCREEN_HEIGHT = height
+const SCREEN_WIDTH = width
+const ASPECT_RATIO = width / height
+const LATITUDE_DELTA = 0.0922
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 
 class Map extends Component {
     constructor () {
@@ -23,8 +31,33 @@ class Map extends Component {
                 {key : '10', artist: "Lex & Sten", name: "Paesaggio Urbano VIII", latitude: 41.87113795018718, longitude: 12.48550865930858, path: require('../images/urbano.png'), address: "Piazzale 12 Ottobre 1492, 15", pathArtist: require('../images/lezsten.jpg')},
                 {key : '11', artist: "Lex & Sten", name: "Murales", latitude: 41.89369880128023, longitude: 12.595449832184487, path: require('../images/murales.png'), address: "Via Prenestina, 932", pathArtist: require('../images/lezsten.jpg')},
             ],
+            initialPosition: {
+                latitude: 0,
+                longitude: 0,
+                latitudeDelta: 0,
+                longitudeDelta: 0,
+              },
         };
       }
+
+      componentDidMount() {
+        navigator.geolocation.getCurrentPosition((position) => {
+          var lat = parseFloat(position.coords.latitude)
+          var long = parseFloat(position.coords.longitude)
+    
+          var initialRegion = {
+            latitude: lat,
+            longitude: long,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }
+    
+          this.setState({initialPosition: initialRegion})
+        },
+        (error) => alert(JSON.stringify(error)),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000});
+      }
+
     list () {
         return this.state.artworks.map(artwork => {
             const url = artwork.path
@@ -66,7 +99,9 @@ class Map extends Component {
             <MapView
               style = {styles.map}
               customMapStyle = { generatedMapStyle }
+              showsUserLocation={true}
               provider={PROVIDER_GOOGLE}
+              initialRegion={this.state.initialPosition}
               region={{
                 latitude: this.props.latitude,
                 longitude: this.props.longitude,

@@ -24,7 +24,7 @@ export default function Artwork({navigation, route}) {
                 <Navbar left={ faAngleLeft } right={ faMapMarkedAlt }/>
                 <ScrollView style={styles.scrollContainer}>
                     <ImageBackground style={styles.img} source={path} >
-                        <TouchableOpacity style={{position : 'absolute', top: 20, right: 20}}>
+                        <TouchableOpacity style={{position : 'absolute', top: 20, right: 20}} onPress={() => navigation.navigate('Zoom' , {path: path})}>
                             <View style={{borderRadius: 25, backgroundColor: 'rgba(0,0,0,0.2)', width: 40, height: 40, justifyContent: 'center', alignItems: 'center'}}>
                                 <FontAwesomeIcon icon={faExpandAlt}  size={20} color={"#f5f5f5"} onPress={() => navigation.navigate('Zoom' , {path: path})}/>
                             </View>
@@ -37,13 +37,12 @@ export default function Artwork({navigation, route}) {
                         end={{x: 1, y: 0}}>
                         <View style={{marginBottom: 15}}>
                             <Text style={styles.txt}>{name}</Text>
-                            <Text style={styles.txt5}>{artist}</Text>
+                            <Text style={styles.txt5} onPress={() => navigation.navigate('Bio', {artist : artist, pathArtist: pathArtist})}>{artist}</Text>
                         </View>
-                        <Text style={styles.txt2}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</Text>
+                        <Text style={styles.txt2}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
                         <TouchableOpacity style={{marginVertical: 15, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}} onPress={() => navigation.navigate('Home', {longitude: longitude, latitude: latitude })}>
                             <View>
-                                <Text style={styles.txt}>Indirizzo:</Text>
-                                <Text style={styles.txt2}>{address}</Text>
+                                <Text style={styles.txt3}>{address}</Text>
                             </View>
                             <View>
                                 <TouchableOpacity style={styles.button} activeOpacity={0.4} onPress={() => navigation.navigate('Home', {longitude: longitude, latitude: latitude })}>
@@ -53,7 +52,7 @@ export default function Artwork({navigation, route}) {
                         </TouchableOpacity>
                         <TouchableOpacity style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}} onPress={ () => navigation.navigate('Bio', {artist : artist, pathArtist: pathArtist})}>
                             <View>
-                                <Text style={styles.txt}>Leggi la pagina dell'artista</Text>
+                                <Text style={styles.txt}>Pagina dell'artista</Text>
                             </View>
                             <View>
                                 <TouchableOpacity style={styles.button} activeOpacity={0.4} onPress={() => navigation.navigate('Bio', {artist : artist, pathArtist: pathArtist})}>
@@ -63,7 +62,7 @@ export default function Artwork({navigation, route}) {
                         </TouchableOpacity>
                         <TouchableOpacity style={{marginVertical: 15, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}} onPress={() => navigation.navigate('ArtworkList', {artist: artist})}>
                             <View>
-                                <Text style={styles.txt} >Vedi altre opere dell'artista</Text>
+                                <Text style={styles.txt} >Altre opere dell'artista</Text>
                             </View>
                             <View>
                                 <TouchableOpacity style={styles.button} activeOpacity={0.4} onPress={() => navigation.navigate('ArtworkList', {artist: artist})}>
@@ -96,13 +95,18 @@ const styles = StyleSheet.create({
         fontStyle:'italic'
     },
     txt5: {
-        fontSize: 18,
+        fontSize: 19,
         color: 'white',
         fontStyle:'italic'
     },
     txt2: {
+        fontSize: 16,
+        color: 'white',
+    },
+    txt3: {
         fontSize: 18,
         color: 'white',
+        fontWeight: '700'
     },
     button: {
         backgroundColor: '#5ee0b6',

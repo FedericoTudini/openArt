@@ -20,7 +20,7 @@ export default function ArtworkList({navigation, route}) {
     const { name, artist, path } = route.params;
     list = () => {
         var artworks = [
-            {key : '1', artist: "Lucamaleonte", name: "D'Apres Gigi (Gigi Proietti)", latitude: 41.95002262447923, longitude: 12.534419526823307, path: require('../images/gigi.jpg'), address: "Via Tonale, 6", pathArtist: require('../images/lucamaleonte.jpg')},
+                {key : '1', artist: "Lucamaleonte", name: "D'Apres Gigi (Gigi Proietti)", latitude: 41.95002262447923, longitude: 12.534419526823307, path: require('../images/gigi.jpg'), address: "Via Tonale, 6", pathArtist: require('../images/lucamaleonte.jpg')},
                 {key : '2', artist: "JBRock", name: "Wall of Fame", latitude: 41.871876903038284, longitude: 12.477701978310407, path: require('../images/walloffame.jpg'), address: "Via dei Magazzini Generali", pathArtist: require('../images/jbrock.jpg')},
                 {key : '3', artist: "Lucamaleonte", name: "Vecchio a chi? (Francesco Totti)", latitude: 41.88252139793549, longitude: 12.504520351948631, path: require('../images/totti.jpg'), address: "Via Sibari, 9", pathArtist: require('../images/lucamaleonte.jpg')},
                 {key : '4', artist: "Lucamaleonte", name: "Patrimonio Indigeno", latitude: 41.898307723931254, longitude: 12.51941269920533, path: require('../images/patrimonio.jpg'), address: "Via dei Piceni, 38", pathArtist: require('../images/lucamaleonte.jpg')},
@@ -34,7 +34,7 @@ export default function ArtworkList({navigation, route}) {
         ];
         return artworks.filter(obj => obj.artist === artist).map(art => {
             return (
-                <TouchableOpacity key={art.key} style={styles.box} activeOpacity={0.7} onPress={() => navigation.navigate('Artwork', {artist: artist, name: name, path: art.path})}>
+                <TouchableOpacity key={art.key} style={styles.box} activeOpacity={0.7} onPress={() => navigation.navigate('Artwork', {artist: art.artist, name: art.name, path: art.path, longitude : art.longitude, latitude : art.latitude, address: art.address, pathArtist : art.pathArtist})}>
                     <ImageBackground style={styles.img} imageStyle={{borderRadius: 25}} source={art.path}/>
                     <View style={styles.overlay}/>
                     <View style={styles.boxBottom}>

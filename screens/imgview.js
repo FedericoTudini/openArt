@@ -3,8 +3,9 @@ import { StyleSheet, View, Pressable, TouchableOpacity, Dimensions, Image, Statu
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import ImageZoom from 'react-native-image-pan-zoom';
+import { StackActions } from '@react-navigation/native';
 
-
+const popAction = StackActions.pop(1);
 
 export default function ImgView({route, navigation}) {
     const { path } = route.params;
@@ -21,7 +22,7 @@ export default function ImgView({route, navigation}) {
             </ImageZoom>
         </View>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.topBar} >
-                    <FontAwesomeIcon icon={faArrowLeft} size={30} color={"#202c3e"} onPress={() => navigation.goBack()}/>
+                    <FontAwesomeIcon icon={faArrowLeft} size={30} color={"#202c3e"} onPress={() => navigation.dispatch(popAction)}/>
         </TouchableOpacity>
     </View>
   );
