@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(255,255,255,1)',
         borderStyle: 'dashed',
         borderRadius: 20,
-        borderWidth: 8,
+        borderWidth: 6,
         flexDirection: 'row'
     },
     touch: {

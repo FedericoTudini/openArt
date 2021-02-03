@@ -11,7 +11,7 @@ export default function Bio({navigation, route}) {
     return (
         <View style={{height: Dimensions.get('window').height, width: Dimensions.get('window').width, backgroundColor: '#ffffff'}}>
             <StatusBar backgroundColor="#202c3e" barStyle="default" />
-            <Navbar left={ faAngleLeft } right={ faMapMarkedAlt }/>
+            <Navbar left={ faAngleLeft } />
             <ScrollView>
                 <LinearGradient 
                 style={styles.gradient}
@@ -33,7 +33,7 @@ export default function Bio({navigation, route}) {
                     </View>
                     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ArtworkList', {artist: artist})}>
                         <FontAwesomeIcon icon={faPalette} size={25} color={"white"}/>
-                        <Text style={{fontSize : 17, color: 'white', paddingLeft: 15}}>Opere dell'artista</Text>
+                        <Text style={{fontSize : 17, color: 'white', paddingLeft: 15}}>OPERE DELL'ARTISTA</Text>
                     </TouchableOpacity>
                 </LinearGradient>
             </ScrollView>

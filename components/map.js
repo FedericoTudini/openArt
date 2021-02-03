@@ -4,6 +4,8 @@ import MapView, {Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps';
 import {Svg, Image as ImageSvg} from 'react-native-svg';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
 import { createStackNavigator} from '@react-navigation/stack';
+import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 const {width, height} = Dimensions.get('window')
 
@@ -14,23 +16,14 @@ const LATITUDE_DELTA = 0.0922
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 
 class Map extends Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
+        const artArr = this.props.data;
+        const toApprove = this.props.toApprove;
         this.list = this.list.bind(this);
         this.state = {
-            artworks: [
-                {key : '1', artist: "Lucamaleonte", name: "D'Apres Gigi (Gigi Proietti)", latitude: 41.95002262447923, longitude: 12.534419526823307, path: require('../images/gigi.jpg'), address: "Via Tonale, 6", pathArtist: require('../images/lucamaleonte.jpg')},
-                {key : '2', artist: "JBRock", name: "Wall of Fame", latitude: 41.871876903038284, longitude: 12.477701978310407, path: require('../images/walloffame.jpg'), address: "Via dei Magazzini Generali", pathArtist: require('../images/jbrock.jpg')},
-                {key : '3', artist: "Lucamaleonte", name: "Vecchio a chi? (Francesco Totti)", latitude: 41.88252139793549, longitude: 12.504520351948631, path: require('../images/totti.jpg'), address: "Via Sibari, 9", pathArtist: require('../images/lucamaleonte.jpg')},
-                {key : '4', artist: "Lucamaleonte", name: "Patrimonio Indigeno", latitude: 41.898307723931254, longitude: 12.51941269920533, path: require('../images/patrimonio.jpg'), address: "Via dei Piceni, 38", pathArtist: require('../images/lucamaleonte.jpg')},
-                {key : '5', artist: "Jaz", name: "Il peso della storia", latitude: 41.85586331943168, longitude: 12.497407540639466, path: require('../images/peso.jpg'), address: "Via di Tormarancia, 85", pathArtist: require('../images/jaz.jpg')},
-                {key : '6', artist: "Lucamaleonte", name: "Nido di Vespe", latitude: 41.864519759662095, longitude: 12.547793263647074, path: require('../images/vespe.png'), address: "Via del Monte del Grano, 8", pathArtist: require('../images/lucamaleonte.jpg')},
-                {key : '7', artist: "Lucamaleonte", name: "Il martirio di Rufina e Seconda", latitude: 41.93211630772763, longitude: 12.47287928387895, path: require('../images/martirio.jpg'), address: "Via Casal del Marmo", pathArtist: require('../images/lucamaleonte.jpg')},
-                {key : '8', artist: "Mr Klevra", name: "Santa Maria di Shangai", latitude: 41.85578364639673, longitude: 12.497785004587298, path: require('../images/santa.jpg'), address: "Via di Tor Marancia, 63", pathArtist: require('../images/klevra.jpg')},
-                {key : '9', artist: "Lex & Sten", name: "Outdoor 2013", latitude: 41.86464970067803, longitude: 12.485922864833723, path: require('../images/outdoor.png'), address: "Via Fausto Vettor, 48", pathArtist: require('../images/lezsten.jpg')},
-                {key : '10', artist: "Lex & Sten", name: "Paesaggio Urbano VIII", latitude: 41.87113795018718, longitude: 12.48550865930858, path: require('../images/urbano.png'), address: "Piazzale 12 Ottobre 1492, 15", pathArtist: require('../images/lezsten.jpg')},
-                {key : '11', artist: "Lex & Sten", name: "Murales", latitude: 41.89369880128023, longitude: 12.595449832184487, path: require('../images/murales.png'), address: "Via Prenestina, 932", pathArtist: require('../images/lezsten.jpg')},
-            ],
+            artworks: artArr,
+            toApprove: toApprove,
             initialPosition: {
                 latitude: 0,
                 longitude: 0,
@@ -56,6 +49,27 @@ class Map extends Component {
         },
         (error) => alert(JSON.stringify(error)),
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000});
+      }
+
+      approve () {
+          return this.state.toApprove.map(art => {
+              const lat = this.state.initialPosition.latitude;
+              const long = this.state.initialPosition.longitude;
+              return(
+                <Marker 
+                style = {styles.mark}
+                coordinate = {{latitude : lat, longitude: long}}
+                image = {require('../images/location-pin.png')}>
+                    <Callout tooltip={true} >
+                        <View style={styles.callV}>
+                            <Text>{art.name}</Text>
+                            <Text>{art.artist}</Text>
+                            <Text>In fase di approvazione</Text>
+                        </View>
+                    </Callout>
+                </Marker>
+              )
+          })
       }
 
     list () {
@@ -87,6 +101,11 @@ class Map extends Component {
                                         <Text numberOfLines={2} style={{textAlign: 'center', alignSelf:'center', fontSize: 14, fontWeight:'bold'}}>{artwork.name}</Text>
                                         <Text style={{textAlign: 'center', alignSelf:'center', fontStyle: 'italic'}}>{artwork.artist}</Text>
                                     </View>
+                                    <View style={{alignSelf: 'flex-end'}}>
+                                        <TouchableOpacity style={{width:50, justifyContent: 'center', alignItems: 'center', borderRadius: 20}}>
+                                            <FontAwesomeIcon icon={faAngleDoubleRight} color={'#202c3e'} size={30}/>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
                         </Callout>
@@ -109,6 +128,7 @@ class Map extends Component {
                 longitudeDelta: 0.0421,
               }}>
                   {this.list()}
+                  {this.approve()}
               </MapView>
           );
     }

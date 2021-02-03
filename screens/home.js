@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
-import { StyleSheet, StatusBar, View, TextInput, TouchableOpacity, Text, ScrollView } from 'react-native';
+import React, {useState, Component } from 'react';
+import { StyleSheet, StatusBar, View, TextInput, Modal, TouchableOpacity, TouchableHighlight, Text, ScrollView } from 'react-native';
 import Navbar from '../components/navbar.js';
 import Map from '../components/map.js';
 import Search from '../components/search.js';
-import { faPlus, faSearch} from '@fortawesome/free-solid-svg-icons';
+import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
+import { faPlus, faStreetView, faSearch, faCrosshairs, faTimes, faImage, faCameraRetro, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Dimensions } from 'react-native';
 import SearchableDropdown from 'react-native-searchable-dropdown';
@@ -28,11 +29,32 @@ const artworks = [
   
 ];
 
-export default function Home({navigation, route}) {
-  const { latitude, longitude } = route.params;
+class Home extends Component {
+  constructor(props){
+    super(props);
+    
+    navigation = this.props.navigation;
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      isVisible: false,
+      position: 'La tua posizione',
+      name: '',
+      artist: '',
+      toApprove: []
+    }
+  }
+  
 
-  return (
-    <View style={styles.container}>
+  handleSubmit () {
+    this.setState({isVisible: !this.state.isVisible});
+    var temp = this.state.toApprove;
+    temp.push({key: Math.random(), name: this.state.name, artist: this.state.artist});
+    this.setState({ toApprove : temp });
+  }
+
+  render () {
+    return (
+      <View style={styles.container}>
       <StatusBar backgroundColor="#202c3e" barStyle="default" />
       <Navbar />
       <View>
@@ -79,18 +101,114 @@ export default function Home({navigation, route}) {
           //To remove the underline from the android input
         />
       </View>
-      <Map latitude={latitude} longitude={longitude}/>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Add')}>
-        <FontAwesomeIcon icon={faPlus} size={35} color={'white'} onPress={() => navigation.navigate('Add')} />
+      <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.isVisible}>
+          <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <View style={{flexDirection: 'row', alignSelf: 'flex-start', paddingRight: 5}}>
+                <FontAwesomeIcon icon={faTimes}  color={'red'} size={30} onPress={() => this.setState({isVisible: !this.state.isVisible})}/>
+                </View>
+                <View style={{width: '97%'}}>
+                  <Text style={styles.txt}>Segnala al nostro staff un'opera non presente sulla mappa!</Text>
+                </View>
+                <View  style={{width: '97%', alignItems: 'center', marginVertical: 10}}>
+                    <View style={styles.positionCont}>
+                      <TextInput value={this.state.position} style={styles.pos} placeholderTextColor={'#cccccc'} placeholder={'Posizione'} onFocus={() => this.setState({position : ''})} onChangeText={(position) => this.setState({position: position})}/>
+                      <TouchableOpacity style={styles.btn2}>
+                        <FontAwesomeIcon size={26} color={'white'} icon={faStreetView} onPress={() => this.setState({position : 'La tua posizione'})}/>
+                      </TouchableOpacity>
+                    </View>
+                    <TextInput style={styles.txtInput} placeholderTextColor={'#cccccc'} placeholder={'Artista'} onChangeText={(artist) => this.setState({artist: artist})}></TextInput>
+                    <TextInput style={styles.txtInput} placeholderTextColor={'#cccccc'} placeholder={'Nome opera'} onChangeText={(name) => this.setState({name: name})}></TextInput>
+                    <TextInput style={styles.txtInput2} placeholderTextColor={'#cccccc'} placeholder={'Note'}></TextInput>
+                </View>
+                <View style={styles.contIcons}>
+                    <TouchableOpacity style={styles.touch}>
+                        <FontAwesomeIcon size={50} color={'white'} icon={faImage}/>
+                        <Text style={{color:'white', fontWeight: 'bold'}}>CARICA</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.touch}>
+                        <FontAwesomeIcon size={45} color={'white'} icon={faCameraRetro}/>
+                        <Text style={{color:'white', fontWeight: 'bold'}}>SCATTA</Text>
+                    </TouchableOpacity>
+                </View>
+                <View onPress={() => handleSubmit()}>
+                    <TouchableOpacity style={styles.btn} onPress={() => this.handleSubmit()}>
+                        <Text style={{color: 'white', fontSize: 16}} onPress={() => this.handleSubmit()}>INVIA</Text>
+                    </TouchableOpacity>
+                </View>
+              </View>
+          </View>
+      </Modal>
+      <Map latitude={this.props.route.params.latitude} longitude={this.props.route.params.longitude} data={artworks} toApprove={this.state.toApprove}/>
+      <TouchableOpacity style={styles.button} onPress={() => this.setState({isVisible: !this.state.isVisible})} >
+        <FontAwesomeIcon icon={faPlus} size={35} color={'white'}  onPress={() => this.setState({isVisible: !this.state.isVisible})}/>
       </TouchableOpacity>
     </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     backgroundColor: '#fff'
+  },
+  btn: {
+    backgroundColor: '#40458a',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: "#000000",
+    shadowOffset: {
+    width: 0,
+    height: 1,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 2.81,
+    elevation: 5,
+    borderRadius: 15,
+    width: 200,
+    marginVertical: 10
+  },
+  btn2: {
+    backgroundColor: '#40458a',
+    padding: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: "#000000",
+    shadowOffset: {
+    width: 0,
+    height: 1,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 2.81,
+    elevation: 5,
+    borderRadius: 30,
+  },
+  centeredView: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  modalView: {
+    backgroundColor: "#202c3e",
+    borderRadius: 20,
+    padding: 5,
+    width: '80%',
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
   },
   button: {
     backgroundColor: '#5ee0b6',
@@ -120,10 +238,25 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     color: 'white'
   },
+  touch: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10
+  },
   result: {
     width: '95%',
     height: 120,
     backgroundColor: 'black',
+  },
+  contIcons: {
+    marginHorizontal: 15,
+    alignItems: 'center',
+    borderColor: 'white',
+    borderStyle: 'dashed',
+    borderRadius: 20,
+    borderWidth: 8,
+    flexDirection: 'row'
   },
   cont: {
     borderBottomWidth: 0,
@@ -132,7 +265,77 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row'
+  },
+  txt: {
+    color: 'white',
+    fontSize: 22,
+    fontWeight: 'bold',
+    paddingHorizontal: '3.5%'
+  },
+  txtInput: {
+    backgroundColor: '#01BAEF',
+    color: 'white',
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    width: '93%',
+    borderRadius : 15,
+    marginVertical: 2,
+    shadowColor: "#000000",
+    shadowOffset: {
+    width: 0,
+    height: 1,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 2.81,
+    elevation: 5,
+  },
+  pos: {
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    shadowColor: "#000000",
+    shadowOffset: {
+    width: 0,
+    height: 1,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 2.81,
+    elevation: 5,
+    backgroundColor: '#01BAEF',
+    borderRadius : 15,
+    color: 'white',
+    width: '80%'
+  },
+  positionCont: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '93%',
+    marginVertical: 2
+  },
+  txtInput2: {
+    backgroundColor: '#01BAEF',
+    color: 'white',
+    height: 100,
+    textAlignVertical: 'top',
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    width: '93%',
+    borderRadius : 15,
+    shadowColor: "#000000",
+    shadowOffset: {
+    width: 0,
+    height: 1,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 2.81,
+    elevation: 5,
+    marginVertical: 2
   }
 });
 
+export default function(props) {
+  const navigation = useNavigation();
+  const route = useRoute();  
+  return <Home  navigation={navigation} route={route} />;
+}
 

@@ -19,7 +19,7 @@ export default function Navbar(props) {
         </TouchableOpacity>
         <Image source={require('../images/logoWhite.png')} style={styles.logo}/>
         <TouchableOpacity>
-          <FontAwesomeIcon icon={props.right} size={40} color={"white"}  onPress={() => navigation.navigate('Home')}/>
+          <FontAwesomeIcon icon={props.right} size={0} color={"white"}/>
         </TouchableOpacity>
       </View>
     )
@@ -29,7 +29,7 @@ export default function Navbar(props) {
     return(
       <View style={styles.leftonly}>
         <TouchableOpacity>
-          <FontAwesomeIcon icon={props.left} size={40} color={"white"}  />
+          <FontAwesomeIcon icon={props.left} size={40} color={"white"}  onPress={() => navigation.dispatch(popAction)}/>
         </TouchableOpacity>
         <Image source={require('../images/logoWhite.png')} style={styles.logo}/>
         <FontAwesomeIcon icon={props.left} size={0} color={"white"} style={{opacity: 0}} />

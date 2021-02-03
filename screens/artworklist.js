@@ -52,7 +52,7 @@ export default function ArtworkList({navigation, route}) {
     return (
         <View style={{height: Dimensions.get('window').height, backgroundColor: '#193A55'}}>
             <StatusBar backgroundColor="#202c3e" barStyle="default" />
-            <Navbar left={ faAngleLeft } right={ faMapMarkedAlt }/>
+            <Navbar left={ faAngleLeft } />
             <LinearGradient
                 style={styles.artistBar}
                 colors={['#008783', '#39bfba']}
