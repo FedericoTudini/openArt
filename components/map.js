@@ -57,14 +57,15 @@ class Map extends Component {
               const long = this.state.initialPosition.longitude;
               return(
                 <Marker 
-                style = {styles.mark}
-                coordinate = {{latitude : lat, longitude: long}}
-                image = {require('../images/location-pin.png')}>
+                    style = {styles.mark}
+                    key={art.key}
+                    coordinate = {{latitude : lat, longitude: long}}
+                    image = {require('../images/approve.png')}>
                     <Callout tooltip={true} >
-                        <View style={styles.callV}>
-                            <Text>{art.name}</Text>
-                            <Text>{art.artist}</Text>
-                            <Text>In fase di approvazione</Text>
+                        <View style={styles.callApprove}>
+                            <Text style={{textAlign: 'center', alignSelf:'center', fontSize: 18, fontWeight:'bold'}}>{art.name}</Text>
+                            <Text style={{textAlign: 'center', alignSelf:'center', fontSize: 14}}>{art.artist}</Text>
+                            <Text style={{textAlign: 'center', alignSelf:'center'}}>In fase di approvazione</Text>
                         </View>
                     </Callout>
                 </Marker>
@@ -170,6 +171,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         width: 195,
         height: 225,
+        borderRadius: 20,
+        padding: 9,
+        marginBottom: 7
+    },
+    callApprove: {
+        backgroundColor: '#fff',
+        width: 195,
+        height: 100,
         borderRadius: 20,
         padding: 9,
         marginBottom: 7

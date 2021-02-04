@@ -1,5 +1,5 @@
 import React, {useState, Component } from 'react';
-import { StyleSheet, StatusBar, View, TextInput, Modal, TouchableOpacity, TouchableHighlight, Text, ScrollView } from 'react-native';
+import { StyleSheet, StatusBar, View, TextInput, Modal, TouchableOpacity, Image, TouchableHighlight, Text, ScrollView } from 'react-native';
 import Navbar from '../components/navbar.js';
 import Map from '../components/map.js';
 import Search from '../components/search.js';
@@ -37,6 +37,7 @@ class Home extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       isVisible: false,
+      isVisibleConfirm: false,
       position: 'La tua posizione',
       name: '',
       artist: '',
@@ -46,6 +47,7 @@ class Home extends Component {
   
 
   handleSubmit () {
+    this.setState({isVisibleConfirm: !this.state.isVisibleConfirm});
     this.setState({isVisible: !this.state.isVisible});
     var temp = this.state.toApprove;
     temp.push({key: Math.random(), name: this.state.name, artist: this.state.artist});
@@ -102,7 +104,7 @@ class Home extends Component {
         />
       </View>
       <Modal
-          animationType="slide"
+          animationType="fade"
           transparent={true}
           visible={this.state.isVisible}>
           <View style={styles.centeredView}>
@@ -142,6 +144,23 @@ class Home extends Component {
               </View>
           </View>
       </Modal>
+      <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.isVisibleConfirm}>
+            <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <TouchableOpacity style={{flexDirection: 'row', alignSelf: 'flex-start', paddingRight: 5}} onPress={() => this.setState({isVisibleConfirm: !this.state.isVisibleConfirm})}>
+                    <FontAwesomeIcon icon={faTimes}  color={'red'} size={30} onPress={() => this.setState({isVisibleConfirm: !this.state.isVisibleConfirm})}/>
+                  </TouchableOpacity>
+                  <View style={{alignItems: 'center', paddingHorizontal: 15, marginBottom: 20}}>
+                    <Text style={{textAlign: 'center', color:'white', fontWeight:'bold', fontSize: 20}}>Grazie per la segnalazione!</Text>
+                    <Text style={{textAlign: 'center', color:'white', fontSize: 16}}>L'opera è in fase di revisione, nel frattempo puoi trovarla sulla mappa con il segnalino verde!</Text>
+                    <Image style={{marginTop: 10, width: 50, height: 50}} source={require('../images/approve.png')}/>
+                  </View>
+                </View>
+            </View>
+          </Modal>
       <Map latitude={this.props.route.params.latitude} longitude={this.props.route.params.longitude} data={artworks} toApprove={this.state.toApprove}/>
       <TouchableOpacity style={styles.button} onPress={() => this.setState({isVisible: !this.state.isVisible})} >
         <FontAwesomeIcon icon={faPlus} size={35} color={'white'}  onPress={() => this.setState({isVisible: !this.state.isVisible})}/>
